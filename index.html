@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cordova-iosrtc</title>
+</head>
+<body>
+<div id="root">
+  <video id="video">
+</div>
+<script>
+  const video = document.querySelector('#video');
+  navigator.mediaDevices.getUserMedia({
+    video: {
+      facingMode: 'environment'
+    }
+  }).then((stream) => {
+    video.srcObject = stream;
+  }).catch((e) => {
+    console.log(e.name + e.message);
+  })
+</script>
+</body>
+</html>

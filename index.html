@@ -28,16 +28,10 @@
   });
   function toscan() {
     let img = document.getElementById('screenshot');
-    if (!img) {
-      img = document.createElement("img");
-      img.id = 'screenshot';
-      img.style.width = '100%';
-    }
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     canvas.getContext("2d").drawImage(video, 0, 0);
     img.src = canvas.toDataURL("image/png");
-    screenshotsContainer.prepend(img);
     qrcode.decode(img.src);
     qrcode.callback = function(imgMsg){
         console.log("imgMsg",imgMsg);

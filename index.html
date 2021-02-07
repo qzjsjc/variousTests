@@ -40,13 +40,15 @@
     canvas.height = video.videoHeight;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0);
-    const imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const code = jsQR(imagedata.data, canvas.width, canvas.height);
-    if (code) {
-      console.log("Found QR code", code);
-      const li = document.createElement('li');
-      li.innerHTML = JSON.stringify(code.data);
-      result.append(li);
+    if (canvas.width && canvas.height) {
+      const imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = jsQR(imagedata.data, canvas.width, canvas.height);
+      if (code) {
+        console.log("Found QR code", code);
+        const li = document.createElement('li');
+        li.innerHTML = JSON.stringify(code.data);
+        result.append(li);
+      }
     }
     interval = setTimeout(toscan, 1000);
   }

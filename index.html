@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>cordova-iosrtc</title>
     <script type="text/javascript" src='cordova.js' ></script>
-    <script type="text/javascript" src='qrcode.js'></script>
+    <script type="text/javascript" src='jsQR.js'></script>
 </head>
 <body>
 <div id="root">
@@ -34,9 +34,9 @@
     canvas.height = video.videoHeight;
     canvas.getContext("2d").drawImage(video, 0, 0);
     img.src = canvas.toDataURL("image/png");
-    qrcode.decode(img.src);
-    qrcode.callback = function(imgMsg){
-        console.log("imgMsg",imgMsg);
+    const code = jsQR(img.src, canvas.width, canvas.height);
+    if (code) {
+      console.log("Found QR code", code);
     }
   }
 </script>

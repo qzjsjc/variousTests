@@ -10,9 +10,8 @@
 <div id="root">
   <video id="video"></video>
   <canvas id='canvas'></canvas>
-  <img id='screenshot' alt='截图' />
   <button onclick='startscan()'>开始扫描</button>
-  <button onclick='stopscan()'></button>
+  <button onclick='stopscan()'>停止扫描</button>
   <ul id='result'>
     <li>结果：</li>
   </ul>
@@ -21,7 +20,7 @@
 <script>
   const video = document.querySelector('#video');
   const canvas = document.querySelector('#canvas');
-  const result = document.getElementById('#result');
+  const result = document.querySelector('#result');
   let interval;
   navigator.mediaDevices.getUserMedia({
     video: {
@@ -34,7 +33,7 @@
   });
   function startscan() {
     video.play();
-    toscan();
+    setTimeout(toscan, 1000);
   }
   function toscan() {
     canvas.width = video.videoWidth;
@@ -47,7 +46,7 @@
       console.log("Found QR code", code);
       const li = document.createElement('li');
       li.innerHTML = JSON.stringify(code.data);
-      result.prepend(li);
+      result.append(li);
     }
     interval = setTimeout(toscan, 1000);
   }

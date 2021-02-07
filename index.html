@@ -18,7 +18,6 @@
 <script>
   const video = document.querySelector('#video');
   const canvas = document.querySelector('#canvas');
-  const qrcode = new QRCode(document.getElementById('qrcode'), {width: 100, height: 100});
   navigator.mediaDevices.getUserMedia({
     video: {
       facingMode: 'environment'
@@ -32,9 +31,11 @@
     let img = document.getElementById('screenshot');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    canvas.getContext("2d").drawImage(video, 0, 0);
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0);
     img.src = canvas.toDataURL("image/png");
-    const code = jsQR(img.src, canvas.width, canvas.height);
+    const imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imagedata, canvas.width, canvas.height);
     if (code) {
       console.log("Found QR code", code);
     }

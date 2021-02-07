@@ -35,7 +35,7 @@
     ctx.drawImage(video, 0, 0);
     img.src = canvas.toDataURL("image/png");
     const imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const code = jsQR(imagedata, canvas.width, canvas.height);
+    const code = jsQR(imagedata.data, canvas.width, canvas.height);
     if (code) {
       console.log("Found QR code", code);
     }

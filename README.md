@@ -1,4 +1,4 @@
-# webpack_test
+# qrcode_test
 
 对qrcode的测试
 

@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
-import '../common/createCode';
+import QRCode from 'qrcode'
 
-class Caoliao extends Component {
+const LEVEL = {
+  0: 'L',
+  1: 'M',
+  2: 'Q',
+  3: 'H'
+};
+
+class Qrcode extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,30 +18,32 @@ class Caoliao extends Component {
   }
   createQrcode = () => {
     const {size, text, correct} = this.props;
-    console.log(correct);
     try {
-      $QRCodeMaker(text, {
-        correct,
-        width: size,
-        height: size
-      }, (res) => {
-        console.log(res);
+      QRCode.toDataURL(text, {type: 'image/png', height: size, width: size, errorCorrectionLevel: LEVEL[correct]})
+      .then(url => {
         this.setState({
-          imgSrc: res.base64,
+          imgSrc: url,
           correct: '成功'
         });
+      })
+      .catch(err => {
+        this.setState({
+          correct: '失败'
+        });
+        console.error(err);
       });
     } catch(e) {
       this.setState({
         correct: '失败'
       });
+      console.error(e);
     }
   }
 
   render() {
     return (
       <div>
-        <h4>草料源码</h4>
+        <h4>npm qrcode</h4>
         <label>结果：</label><span>{this.state.correct}</span>
         <br />
         <br />
@@ -44,4 +53,4 @@ class Caoliao extends Component {
   }
 }
 
-export default Caoliao;
+export default Qrcode;

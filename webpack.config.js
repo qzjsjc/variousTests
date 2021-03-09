@@ -10,8 +10,5 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     chunkFilename: '[name].bundle.js'
-  },
-  optimization: {
-    chunkIds: 'named'
   }
 };

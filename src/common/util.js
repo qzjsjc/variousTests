@@ -5,3 +5,7 @@ export const testA = () => {
 export const testB = () => {
     console.log('testB');
 }
+
+export const testCommon = () => {
+    console.log('testCommon');
+}

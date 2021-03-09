@@ -1,3 +1,4 @@
-import {testB} from './common/util';
+import {testB, testCommon} from './common/util';
 
 testB();
+testCommon();

@@ -1,0 +1,26 @@
+{
+  "name": "variousTests",
+  "version": "1.0.0",
+  "description": "各种测试和学习",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qzjsjc/variousTests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qzjsjc/variousTests/issues"
+  },
+  "homepage": "https://github.com/qzjsjc/variousTests#readme",
+  "dependencies": {
+    "@prisma/client": "2.23.0",
+    "apollo-server": "^2.24.1",
+    "graphql": "^15.5.0",
+    "prisma": "2.23.0"
+  }
+}

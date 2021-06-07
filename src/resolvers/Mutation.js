@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { APP_SECRET } = require('../utils')
+const { APP_SECRET, getUserId } = require('../utils')
 
 async function signup(parent, args, context, info) {
   // 1
@@ -41,6 +41,36 @@ async function login(parent, args, context, info) {
   }
 }
 
+async function vote(parent, args, context, info) {
+  // 1
+  const userId = getUserId(context)
+
+  // 2
+  const vote = await context.prisma.vote.findUnique({
+    where: {
+      linkId_userId: {
+        linkId: Number(args.linkId),
+        userId: userId
+      }
+    }
+  })
+
+  if (Boolean(vote)) {
+    throw new Error(`Already voted for link: ${args.linkId}`)
+  }
+
+  // 3
+  const newVote = context.prisma.vote.create({
+    data: {
+      user: { connect: { id: userId } },
+      link: { connect: { id: Number(args.linkId) } },
+    }
+  })
+  context.pubsub.publish("NEW_VOTE", newVote)
+
+  return newVote
+}
+
 module.exports = {
   createUser: (parent, args, context, info) => {
     const user = {id: `user-${users.length}`, name: args.name};
@@ -55,6 +85,7 @@ module.exports = {
         postedBy: {connect: {id: userId}}
       }
     });
+    context.pubsub.publish("NEW_LINK", newLink);
     return newLink;
   },
   updateLink: (parent, args, context) => {
@@ -69,5 +100,6 @@ module.exports = {
     return context.prisma.link.delete({where: {id: args.id}});
   },
   signup,
-  login
+  login,
+  vote
 }

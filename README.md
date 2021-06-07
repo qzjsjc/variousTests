@@ -24,3 +24,8 @@ npx prisma studio
 再次刷新数据库，并给这次操作命名为add-user-model
 npx prisma migrate dev --name "add-user-model"
 后续再次执行命令4,则生产新的api,包含了新增的数据库定义内容
+
+7. 
+刷新数据，并给这次操作命名为add-vote-model
+npx prisma migrate dev --name "add-vote-model"
+后续再次执行命令4,则生产新的api,包含了新增的数据库定义内容

@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "excellentexport": "^3.7.0",
+    "js-xlsx": "^0.8.22",
+    "jszip": "^3.7.1",
+    "webpack": "^5.50.0",
+    "xlsx": "^0.17.0",
+    "xlsx-style": "^0.8.13"
+  },
+  "scripts": {
+    "pro": "webpack --config webpack.js"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.7.2"
+  },
+  "browser": {
+    "fs": false
+  }
+}

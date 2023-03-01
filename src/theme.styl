@@ -1,0 +1,30 @@
+light = {
+  background_color_main: rgb(194, 226, 245)
+}
+
+dark = {
+  background_color_main: rgb(0, 0, 0)
+}
+
+themeList = (light dark)
+
+:root {
+    --background-color: light[background_color_main];
+    --text-color: #121416d8;
+    --link-color: #543fd7;
+    --no-data: url(./blank.png);
+}
+
+html[data-theme='light'] {
+    --background-color: light[background_color_main];
+    --text-color: #121416d8;
+    --link-color: #543fd7;
+    --no-data: url(./blank.png);
+}
+
+html[data-theme='dark'] {
+    --background-color: dark[background_color_main];
+    --text-color: #F7F8F8;
+    --link-color: #828fff;
+    --no-data: url(./blank.png);
+}

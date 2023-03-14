@@ -21,12 +21,32 @@ module.exports = {
       {
         test: /\.(js|jsx)/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', {targets: {chrome: '50', ie: '11'}}],
+                '@babel/preset-react',
+                '@babel/preset-typescript'
+              ],
+              plugins: [
+                '@babel/plugin-transform-runtime',
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          'css-loader'
+        ]
       }
     ]
   },
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
+    static: path.resolve(__dirname, '../dist'),
     historyApiFallback: {
       index: '/index.html'
     },
